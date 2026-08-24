@@ -1,0 +1,199 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>canteen stock management</title>
+    <style>
+        body{
+            margin: 0;
+            font-family: Arial,  sans-serif;
+            background: #f4f6f9;
+        }
+        .page-container{
+            display: flex;
+            min-height: 100vh;
+        }
+    .sidebar{
+    width: 200px;
+    flex-shrink:0;
+    background: #1e293b;
+    left: 0;
+    top: 0;
+    padding-top: 20px;
+    box-sizing: border-box;
+}
+.sidebar h2{
+    color: white;
+    text-align: center;
+    margin-bottom: 30px;
+}
+.sidebar a{
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 15px 20px;
+    font-size: 16px;
+}
+.sidebar a:hower{
+    background: #334155;
+}
+.main_content{
+    margin-left: 200px;
+    padding: 35px;
+}
+.main_content h1{
+    margin-bottom: 5px;
+}
+.cards{
+    display: grid;
+    grid-template-columns: repeat(4,minmax(150px,1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+.card{
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+.card h3{
+    margin-top: 0;
+}
+.card p{
+    font-size: 28px;
+    font-weight: bold;
+}
+.quick_actions{
+    margin-top: 40px;
+    background: white;
+    padding:25px;
+    border-radius: 10px;
+}
+.item-section{
+    margin-top: 40px;
+    background:white ;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+.item-section h2{
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+.item-section table{
+    width: 100%;
+    border-collapse: collapse;
+}
+.item-section th,.item-section td{
+    padding: 15px 30px;
+    text-align: left;
+    white-space: nowrap;
+    border-bottom: 1px solid #ddd;
+}
+.item-section th{
+    background: #1e293b;
+    color: white;
+}
+.stock-table{
+    width: 100%;
+    border-collapse: collapse;
+}
+.stock-table th,.stock-table td{
+    padding: 15px 40px !important;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+.stock-table th{
+    background: #1e293b;
+    color: white;
+}
+.quick_actions button{
+    padding: 12px 20px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background: #2563eb;
+    color: white;
+}
+.quick_actions button:hover{
+    background: #1d4ed8;
+}
+</style>
+</head>
+<body>
+    <div class="page-container">
+    <div class="sidebar">
+    <h2>Canteen</h2>
+    <a href="{% url 'dashboard' %}">Dashboard</a>
+    <a href="{% url 'stock' %}">View Stock</a>
+    <a href="{% url 'add_stock' %}">+ Add Stock</a>
+    <a href="{% url 'reports' %}">Reports</a>
+    <a href="{% url 'login' %}">Login</a>
+    </div>
+    <div class="main-content">
+        <h1>Dashboard</h1>
+        <p>Welcome to canteen stock management system</p>
+        <div class="cards">
+            <div class="card">
+                <h3>Total Stock</h3>
+                <p>120</p>
+            </div>
+            <div class="card">
+                <h3>Low Stock</h3>
+                <p>8</p>
+            </div>
+            <div class="card">
+                <h3>Items Sold</h3>
+                <p>75</p>
+            </div>
+            <div class="card">
+                <h3>Reports</h3>
+                <p>Veiw Reports</p>
+            </div>
+        </div class="items-section">
+        <h2>Items & Prices</h2>
+        <table class="stock-table">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Category</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr>
+                    <td>{{ item.item_name }}</td>
+                    <td>{{ item.category }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.price}}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4">No stock items available</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        </div>
+        <div class="quick-actions">
+            <h2>Quick Actions</h2>
+            <a href="add_stock.html">
+                <button>+Add Stock</button>
+            </a>
+            <a href="stock.html">
+                <button>Veiw Stock</button>
+            </a>
+            <a href="reports.html">
+                <button>View Reports</button>
+            </a>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
